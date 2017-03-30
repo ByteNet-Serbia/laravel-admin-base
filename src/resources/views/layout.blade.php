@@ -1,35 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ substr(config('app.locale'), 0, 2) }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     {{-- Encrypted CSRF token for Laravel, in order for Ajax requests to work --}}
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>
-        {{ isset($title) ? $title.' :: '.config('bytenet.base.project_name').' Admin' : config('bytenet.base.project_name').' Admin' }}
+        {{ isset($title) ? $title.' :: '.config('bytenet.admin.base.project_name').' Admin' : config('bytenet.admin.base.project_name').' Admin' }}
     </title>
 
-
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     @yield('before_styles')
 
 
-
-
-
-
     {{-- ***** BootstrapCDN.com - START ***** --}}
+    <!-- Bootstrap 3.3.7 -->
+        <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/bootstrap/css/bootstrap.min.css">
     <!-- Fonts -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
-
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700&subset=latin-ext">
 
         <!-- Optional theme -->
     {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> --}}
@@ -41,12 +35,13 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="/backend/adminlte/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
     -->
-    <link rel="stylesheet" href="/backend/adminlte/dist/css/skins/skin-blue.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/dist/css/skins/skin-blue.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -55,20 +50,18 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-
+    <!-- Bytenet Base CSS -->
+    <link rel="stylesheet" href="{{ asset('vendor/bytenet/bytenet.base.css') }}">
 
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet" type="text/css"> --}}
 
 
-    <!-- BackPack Base CSS -->
-
     @yield('after_styles')
 
-    
 
 </head>
 
-<!--
+{{--
 BODY TAG OPTIONS:
 =================
 Apply one or more of the following classes to get the
@@ -87,9 +80,9 @@ desired effect
 |               | sidebar-collapse                        |
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
--->
+ --}}
 
-<body class="hold-transition {{ config('bytenet.base.skin') }} sidebar-mini">
+<body class="hold-transition {{ config('bytenet.admin.base.skin') }} sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
 
@@ -98,24 +91,24 @@ desired effect
             <!-- Logo -->
             <a href="{{ url('') }}" class="logo">
               <!-- mini logo for sidebar mini 50x50 pixels -->
-              <span class="logo-mini">{!! config('bytenet.base.logo_mini') !!}</span>
+              <span class="logo-mini">{!! config('bytenet.admin.base.logo_mini') !!}</span>
               <!-- logo for regular state and mobile devices -->
-              <span class="logo-lg">{!! config('bytenet.base.logo_lg') !!}</span>
+              <span class="logo-lg">{!! config('bytenet.admin.base.logo_lg') !!}</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
               <!-- Sidebar toggle button-->
               <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                <span class="sr-only">{{ trans('bytenet::base.toggle_navigation') }}</span>
+                <span class="sr-only">{{ trans('bytenet-admin-base::base.toggle_navigation') }}</span>
               </a>
 
-              @include('bytenet::inc.menu')
+              @include('bytenet-admin-base::inc.menu')
             </nav>
         </header>
 
       <!-- =============================================== -->
 
-      @include('bytenet::inc.sidebar')
+      @include('bytenet-admin-base::inc.sidebar')
 
       <!-- =============================================== -->
 
@@ -135,19 +128,21 @@ desired effect
       <!-- /.content-wrapper -->
 
       <footer class="main-footer">
-          @if (config('bytenet.base.show_powered_by'))
+          @if (config('bytenet.admin.base.show_powered_by'))
               <div class="pull-right hidden-xs">
-                  {{ trans('bytenet::base.powered_by') }} <a target="_blank" href="https://github.com/ByteNet-Serbia/LaravelAdminBase">Lara BTNT</a>
+                  {{ trans('bytenet-admin-base::base.powered_by') }}
+                  <a target="_blank" href="https://github.com/ByteNet-Serbia/LaravelAdminBase">Lara BTNT</a>
               </div>
           @endif
 
-            <strong>Copyright &copy; {{ date('Y.') }}</strong>
-              {{ trans('bytenet::base.handcrafted_by') }} <a target="_blank" href="{{ config('bytenet.base.developer_link') }}">{{ config('bytenet.base.developer_name') }}</a>.
-              All rights reserved.
+            <strong>{{ trans('bytenet-admin-base::base.copyright') }} &copy; {{ date('Y.') }}</strong>
+            {{ trans('bytenet-admin-base::base.handcrafted_by') }}
+            <a target="_blank" href="{{ config('bytenet.admin.base.developer_link') }}">{{ config('bytenet.admin.base.developer_name') }}</a>.
+            {{ trans('bytenet-admin-base::base.all_rights_reserved') }}.
       </footer>
 
 
-        @include('bytenet::inc.sidebar_control')
+        @include('bytenet-admin-base::inc.sidebar_control')
 
     </div>
     <!-- ./wrapper -->
@@ -158,20 +153,23 @@ desired effect
     <!-- REQUIRED JS SCRIPTS -->
 
     <!-- jQuery 2.2.3 -->
-    <script src="/backend/adminlte/plugins/jQuery/jquery-2.2.3.min.js"></script>
-    <!-- Bootstrap 3.3.6 -->
-    {{-- <script src="/backend/adminlte/bootstrap/js/bootstrap.min.js"></script> --}}
+    {{-- <script src="{{ asset('vendor/adminlte') }}/plugins/jQuery/jquery-2.2.3.min.js"></script> --}}
+    {{-- <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <!-- Bootstrap 3.3.7 -->
+    {{-- <script src="{{ asset('vendor/adminlte') }}/bootstrap/js/bootstrap.min.js"></script> --}}
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+
     <!-- AdminLTE App -->
-    <script src="/backend/adminlte/dist/js/app.min.js"></script>
+    <script src="{{ asset('vendor/adminlte') }}/dist/js/app.min.js"></script>
 
-    <!-- Optionally, you can add Slimscroll and FastClick plugins.
-         Both of these plugins are recommended to enhance the
-         user experience. Slimscroll is required when using the
-         fixed layout. -->
+    {{-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. Slimscroll is required when using the
+     fixed layout. --}}
 
-    @include('bytenet::inc.alerts')
+    @include('bytenet-admin-base::inc.alerts')
 
     @yield('after_scripts')
 
