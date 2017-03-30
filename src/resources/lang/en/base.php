@@ -4,12 +4,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | ByteNet\Base Language Lines
+    | Backpack\Base Language Lines
     |--------------------------------------------------------------------------
     */
 
     'registration_closed'  => 'Registration is closed.',
-    'first_page_you_see'   => 'The first page you see after login',
+    'first_page_you_see'   => 'Home page',
     'login_status'         => 'Login status',
     'logged_in'            => 'You are logged in!',
     'toggle_navigation'    => 'Toggle navigation',

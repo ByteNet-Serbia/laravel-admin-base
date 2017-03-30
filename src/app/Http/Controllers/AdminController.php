@@ -6,14 +6,13 @@ use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
-    protected $data = []; // the information we send to the view
 
     /**
      * Create a new controller instance.
      */
     public function __construct()
     {
-        $this->middleware('auth.bytenet');
+        $this->middleware('bytenet.auth');
     }
 
     /**
@@ -23,9 +22,8 @@ class AdminController extends Controller
      */
     public function dashboard()
     {
-        //$this->data['title'] = trans('bytenet::base.dashboard'); // set the page title
-        $this->data['title'] = 'Dashboard';
+        $title = trans('bytenet::base.dashboard'); // set the page title
 
-        return view('bytenet::dashboard', $this->data);
+        return view('bytenet::dashboard', compact('title'));
     }
 }

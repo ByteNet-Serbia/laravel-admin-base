@@ -12,14 +12,14 @@ return [
     */
 
     // Project name. Shown in the breadcrumbs and a few other places.
-    'project_name' => 'ByteNET Travel',
+    'project_name' => config('app.name'),
 
     // Menu logos
-    'logo_lg'   => '<strong>ByteNet</strong>Travel',
-    'logo_mini' => '<strong>B</strong>T',
+    'logo_lg'   => '<strong>Byte Net</strong> Travel',
+    'logo_mini' => '<strong>BTNT</strong>',
 
     // Developer or company name. Shown in footer.
-    'developer_name' => 'ByteNET',
+    'developer_name' => 'Byte Net',
 
     // Developer website. Link in footer.
     'developer_link' => 'http://bytenet.rs',
@@ -28,8 +28,8 @@ return [
     'show_powered_by' => true,
 
     // The AdminLTE skin. Affects menu color and primary/secondary colors used throughout the application.
-    'skin' => 'skin-purple',
-    // Options: skin-black, skin-blue, skin-purple, skin-red, skin-yellow, skin-green, skin-blue-light, skin-black-light, skin-purple-light, skin-green-light, skin-red-light, skin-yellow-light
+    'skin' => 'skin-blue',
+    // Options: skin-black, skin-blue, skin-purple, skin-red, skin-yellow, skin-green
 
     // Date & Datetime Format Syntax: https://github.com/jenssegers/date#usage
     // (same as Carbon)
@@ -48,6 +48,7 @@ return [
     */
 
     'registration_open' => true,
+    'login_open' => true,
 
 
     /*
